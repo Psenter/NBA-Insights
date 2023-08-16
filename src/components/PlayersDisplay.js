@@ -17,13 +17,8 @@ function PlayersDisplay() {
     return (
         <div className="row">
             {players.map((item) => (
-                <div key={item.id}>
-                    <div>{item.first_name}</div>
-                    <div>{item.last_name}</div>
-                    <div>#{item.jersey_number}</div>
-                    <div>{item.position}</div>
-                    <div>{item.height}in.</div>
-                    <div>{item.weight}lbs.</div>
+                <div className="text-center" key={item.id}>
+                    <div className="mb-2">{item.first_name} {item.last_name} #{item.jersey_number} {item.position} {item.height}in. {item.weight}lbs.</div>
                 </div>
             ))}
         </div>
