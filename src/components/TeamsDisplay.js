@@ -15,13 +15,13 @@ function TeamsDisplay() {
     }, []);
 
     return (
-        <div className="row justify-content-center text-center">
-            <div className="col-2">
+        <div className="row justify-content-center text-center mb-3">
+            <div className="col-3">
                 {teams.map((item) => (
                     <h2 key={item.id}>{item.team_name}</h2>
                 ))}
             </div>
-            <div className="col-2">
+            <div className="col-3">
                 {teams.map((item) => (
                     <h2 key={item.id}>{item.wins} - {item.losses}</h2>
                 ))}

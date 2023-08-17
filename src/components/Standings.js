@@ -15,8 +15,8 @@ function Standings() {
                 const eastConferenceTeams = teamsData.filter(team => team.conference_id === 1);
                 const westConferenceTeams = teamsData.filter(team => team.conference_id === 2);
 
-                eastConferenceTeams.sort((a, b) => a.wins - b.wins);
-                westConferenceTeams.sort((a, b) => a.wins - b.wins);
+                eastConferenceTeams.sort((a, b) => b.wins - a.wins);
+                westConferenceTeams.sort((a, b) => b.wins - a.wins);
 
                 setEasternConference(eastConferenceTeams);
                 setWesternConference(westConferenceTeams);
@@ -31,13 +31,13 @@ function Standings() {
             <div className="col">
                 <h2>Eastern Conference</h2>
                 {easternConference.map((item) => (
-                    <h3 key={item.id}>{item.team_name} {item.losses} - {item.wins}</h3>
+                    <h3 key={item.id}>{item.team_name} {item.wins} - {item.losses}</h3>
                 ))}
             </div>
             <div className="col">
                 <h2>Western Conference</h2>
                 {westernConference.map((item) => (
-                    <h3 key={item.id}>{item.team_name} {item.losses} - {item.wins}</h3>
+                    <h3 key={item.id}>{item.team_name} {item.wins} - {item.losses}</h3>
                 ))}
             </div>
         </div>

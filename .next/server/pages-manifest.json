@@ -2,7 +2,8 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/": "pages/index.js",
   "/teamsDisplay": "pages/teamsDisplay.js",
-  "/standings": "pages/standings.js"
+  "/playersDisplay": "pages/playersDisplay.js",
+  "/standings": "pages/standings.js",
+  "/": "pages/index.js"
 }
