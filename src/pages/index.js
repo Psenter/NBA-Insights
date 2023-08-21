@@ -5,8 +5,10 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Page() {
-  return <div>
-  <Header/>
-  <CustomNavbar/>
-  </div>
+  return (
+    <div>
+      <Header/>
+      <CustomNavbar/>
+    </div>
+  );
 }

@@ -29,6 +29,7 @@ function TeamDetail() {
             <h1>{teamDetails.team_name}</h1>
             <p>Wins: {teamDetails.wins}</p>
             <p>Losses: {teamDetails.losses}</p>
+            <button type="button" onClick={() => router.back()}>X</button>
         </div>
     );
 }

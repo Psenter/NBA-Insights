@@ -5,8 +5,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Standings from "../components/Standings";
 
 export default function Page() {
-  return <div>
-    <CustomNavbar/>
-    <Standings/>
-  </div>
+  return (
+    <div>
+      <CustomNavbar/>
+      <Standings/>
+    </div>
+  );
 }
