@@ -3,7 +3,5 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/teamsDisplay": "pages/teamsDisplay.js",
-  "/playersDisplay": "pages/playersDisplay.js",
-  "/standings": "pages/standings.js",
-  "/": "pages/index.js"
+  "/[id]": "pages/[id].js"
 }
