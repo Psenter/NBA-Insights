@@ -18,7 +18,9 @@ function TeamsDisplay() {
         <div className="row justify-content-center text-center mb-3">
             <div className="col-3">
                 {teams.map((item) => (
-                    <h2 key={item.id}>{item.team_name}</h2>
+                    <a key={item.id} href={`/team/${item.id}`}>
+                        {item.team_name}
+                    </a>
                 ))}
             </div>
             <div className="col-3">
