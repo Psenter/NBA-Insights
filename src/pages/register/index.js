@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,} from "react";
 import AuthService from "../../services/auth.service";
 import { useRouter } from "next/navigation";
 import { useGlobalState } from "../../context/GlobalState";
+import Navbar from '../../components/navbar';
+import styles from './register.module.css';
+
+import jwtDecode from 'jwt-decode';
 
 function Register() {
-  const [state, dispatch] = useGlobalState();
+  const {state, dispatch} = useGlobalState();
   const router = useRouter();
   const [user, setUser] = useState({
     password: "",
@@ -12,6 +16,7 @@ function Register() {
     firstName: "",
     lastName: "",
     email: "",
+    username: "",
   });
 
   const handleChange = (key, value) => {
@@ -23,20 +28,38 @@ function Register() {
 
   async function handleRegister(e) {
     e.preventDefault();
-    AuthService.register(user);
-    dispatch({
-      currentUserToken: state.currentUserToken,
-      currentUser: state.currentUser?.user_id,
-    });
-    router.push("/");
+    
+    try {
+      await AuthService.register(user);
+      
+      const loginResp = await AuthService.login(user.email, user.password, user.username);
+  
+      if (loginResp.access) {
+        const data = jwtDecode(loginResp.access);
+        await dispatch({
+          type: 'SET_USER',
+          payload: data,
+        });
+        router.push('/');
+      } else {
+        console.log('Login after registration failed');
+        dispatch({ type: 'LOGOUT_USER' });
+      }
+    } catch (error) {
+      console.error('Registration failed:', error);
+    }
   }
+
 
   return (
     <div className="w-screen h-screen">
+      <Navbar />
+      <div className={styles.container}>
+        <h1>Register</h1>
       <div className="flex">
         <form className="mx-auto border-2 bg-mtgray" onSubmit={handleRegister}>
           <div className="flex justify-between m-2 items-center space-x-2">
-            <label htmlFor="firstName">First Name:</label>
+            <label htmlFor="firstName">First Name:</label><br></br>
             <input
               className="border"
               type="text"
@@ -46,7 +69,7 @@ function Register() {
             />
           </div>
           <div className="flex justify-between m-2 items-center space-x-2">
-            <label htmlFor="lastName">Last Name:</label>
+            <label htmlFor="lastName">Last Name:</label><br></br>
             <input
               className="border"
               type="text"
@@ -56,30 +79,35 @@ function Register() {
             />
           </div>
           <div className="flex justify-between m-2 items-center space-x-2">
-            <label htmlFor="email">Email:</label>
+            <label htmlFor="email">Email:</label><br></br>
             <input
               className="border"
               type="text"
               id="email"
               required
-              onChange={(e) => handleChange("email", e.target.value)}
+              onChange={(e) => {
+                let olduser = user;
+                olduser.email = e.target.value;
+                olduser.username = e.target.value;
+                setUser(olduser);
+              }}
             />
           </div>
           <div className="flex justify-between m-2 items-center space-x-2">
-            <label htmlFor="password">Password:</label>
+            <label htmlFor="password">Password:</label><br></br>
             <input
               className="border"
-              type="text"
+              type="password"
               id="password"
               required
               onChange={(e) => handleChange("password", e.target.value)}
             />
           </div>
           <div className="flex justify-between m-2 items-center space-x-2">
-            <label htmlFor="passwordConf">Confirm Password:</label>
+            <label htmlFor="passwordConf">Confirm Password:</label><br></br>
             <input
               className="border"
-              type="text"
+              type="password"
               id="passwordConf"
               required
               onChange={(e) => handleChange("passwordConf", e.target.value)}
@@ -89,7 +117,7 @@ function Register() {
             <input
               type="submit"
               value="Register!"
-              className="bg-mtpurple text-white py-2 px-4 rounded-lg mx-auto my-2 font-bold disabled:opacity-60"
+              className={styles.button}
               disabled={
                 user.password &&
                 user.password.length >= 8 &&
@@ -104,6 +132,7 @@ function Register() {
           </div>
         </form>
       </div>
+    </div>
     </div>
   );
 }
