@@ -2,8 +2,8 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/[id]": "pages/[id].js",
   "/": "pages/index.js",
-  "/registerPage": "pages/registerPage.js",
-  "/loginPage": "pages/loginPage.js"
+  "/[id]": "pages/[id].js",
+  "/loginPage": "pages/loginPage.js",
+  "/registerPage": "pages/registerPage.js"
 }
