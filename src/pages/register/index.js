@@ -1,11 +1,9 @@
 import React, { useEffect, useState,} from "react";
-import AuthService from "../../services/auth.service";
+import authService from "../../services/auth.service";
 import { useRouter } from "next/navigation";
 import { useGlobalState } from "../../context/GlobalState";
-import Navbar from '../../components/navbar';
-import styles from './register.module.css';
-
 import jwtDecode from 'jwt-decode';
+import Link from "next/link";
 
 function Register() {
   const {state, dispatch} = useGlobalState();
@@ -27,34 +25,21 @@ function Register() {
   };
 
   async function handleRegister(e) {
+    console.log(e);
     e.preventDefault();
-    
-    try {
-      await AuthService.register(user);
-      
-      const loginResp = await AuthService.login(user.email, user.password, user.username);
-  
-      if (loginResp.access) {
-        const data = jwtDecode(loginResp.access);
-        await dispatch({
-          type: 'SET_USER',
-          payload: data,
-        });
-        router.push('/');
-      } else {
-        console.log('Login after registration failed');
-        dispatch({ type: 'LOGOUT_USER' });
-      }
-    } catch (error) {
-      console.error('Registration failed:', error);
-    }
+    user.username=user.email;
+    authService.register(user);
+    dispatch({
+      currentUserToken: state.currentUserToken,
+      currentUser: state.currentUser?.user_id,
+    });
+    router.push("/");
   }
 
 
   return (
     <div className="w-screen h-screen">
-      <Navbar />
-      <div className={styles.container}>
+      <div>
         <h1>Register</h1>
       <div className="flex">
         <form className="mx-auto border-2 bg-mtgray" onSubmit={handleRegister}>
@@ -117,7 +102,6 @@ function Register() {
             <input
               type="submit"
               value="Register!"
-              className={styles.button}
               disabled={
                 user.password &&
                 user.password.length >= 8 &&
@@ -131,6 +115,7 @@ function Register() {
             />
           </div>
         </form>
+        <Link href={`/loginPage`}>Login</Link>
       </div>
     </div>
     </div>

@@ -2,79 +2,53 @@ import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
 import { useGlobalState } from '../../context/GlobalState';
 import authService from '../../services/auth.service';
-import Navbar from '../../components/navbar';
 import jwtDecode from 'jwt-decode';
-import styles from './login.module.css';
 import Link from 'next/link';
 
-function Page() {
+function Login() {
     const router = useRouter();
 
-    const {state, dispatch} = useGlobalState();
+    const { state, dispatch } = useGlobalState();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    // const [username, setUsername] = useState("");
 
-    const handleLogin = (e) => {
+    function handleLogin(e) {
         e.preventDefault();
-        const username = email;
+        // console.log(email.current.value , password.current.value , "HERE")
         authService
-          .login(email, password, username)
-          .then(async (resp) => {
-            console.log(resp);
-            if (resp.access) {
-              let data = jwtDecode(resp.access);
-              await dispatch({
-                type: 'SET_USER',
-                payload: data,
-              });
-              router.push('/');
-            } else {
-              console.log('Login failed');
-              dispatch({ type: 'LOGOUT_USER' }); 
-            }
-          });
-      };
-      
+            .login(email, password)
+            .then(async (resp) => {
+                let data = jwtDecode(resp.access)
+                await dispatch({
+                    currentUserToken: resp.access,
+                    currentUser: data
+                })
+                router.push('/dashboard')
+            });
+    }
 
 
     return (
         <div>
-           <Navbar />
-            <div className={styles.container}>
-            <h1>Login</h1>
             <div className='flex'>
                 <form
                     onSubmit={handleLogin}
                     className='mx-auto my-auto border-2 bg-mtgray'
                 >
                     <div className='flex justify-between m-2 items-center space-x-2'>
-                        <label htmlFor="email">Email:</label><br></br>
+                        <label htmlFor="email">Email:</label>
                         <input
                             className='border'
-                            type="text"
+                            type="password"
                             id="email"
                             name="email"
                             onChange={(e) => setEmail(e.target.value)}
                             required
                         />
-                        
-                        {/* <div className='flex justify-between m-2 items-center space-x-2'>
-                        <label htmlFor="usernamel">Username:</label><br></br>
-                        <input
-                            className='border'
-                            type="text"
-                            id="username"
-                            name="username"
-                            onChange={(e) => setUsername(e.target.value)}
-                            required
-                        /> */}
-                        
-                    
                     </div>
                     <div className='flex justify-between m-2 items-center space-x-2'>
-                        <label htmlFor="pass">Password:</label><br></br>
+                        <label htmlFor="pass">Password</label>
                         <input
                             className='border'
                             type="password"
@@ -87,19 +61,16 @@ function Page() {
                     </div>
                     <div className='flex'>
                         <input
-                            className={styles.button}
+                            className="bg-mtpurple text-white py-2 px-4 rounded-lg mx-auto my-2 font-bold disabled:opacity-60"
                             type="submit"
                             value="Sign in"
                         />
                     </div>
+                    <Link href={`/registerPage`}>Register</Link>
                 </form>
-                <Link href="/register" classname={styles.link}>
-            Register Here
-          </Link>
             </div>
-        </div>
         </div>
     )
 }
 
-export default Page
+export default Login
