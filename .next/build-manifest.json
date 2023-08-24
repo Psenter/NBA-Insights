@@ -32,15 +32,15 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/loginPage": [
+    "/playersDisplay": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/loginPage.js"
+      "static/chunks/pages/playersDisplay.js"
     ],
-    "/registerPage": [
+    "/standings": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/registerPage.js"
+      "static/chunks/pages/standings.js"
     ],
     "/teamsDisplay": [
       "static/chunks/webpack.js",

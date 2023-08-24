@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Link from "next/link";
 
 function PlayersDisplay() {
     const [players, setPlayers] = useState([]);
@@ -17,8 +18,10 @@ function PlayersDisplay() {
     return (
         <div className="row">
             {players.map((item) => (
-                <div className="text-center" key={item.id}>
-                    <div className="mb-2">{item.first_name} {item.last_name} #{item.jersey_number} {item.position} {item.height}in. {item.weight}lbs.</div>
+                <div className="col-3 text-center" key={item.id}>
+                    <Link href={`/player/${item.id}`}>
+                            <div className="mb-2">{item.first_name} {item.last_name}</div>
+                    </Link>
                 </div>
             ))}
         </div>

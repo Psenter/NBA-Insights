@@ -7,7 +7,7 @@ import Image from "next/image";
 function Header() {
   return (
     <div className="text-center">
-      <img src="/fourlogo.PNG" alt="Logo for the site"></img>
+      <img className="img-fluid" src="/fourlogo.PNG" alt="Logo for the site"></img>
     </div>
   );
 }

@@ -3,8 +3,8 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/": "pages/index.js",
-  "/registerPage": "pages/registerPage.js",
+  "/[id]": "pages/[id].js",
+  "/standings": "pages/standings.js",
   "/teamsDisplay": "pages/teamsDisplay.js",
-  "/loginPage": "pages/loginPage.js",
-  "/[id]": "pages/[id].js"
+  "/playersDisplay": "pages/playersDisplay.js"
 }
