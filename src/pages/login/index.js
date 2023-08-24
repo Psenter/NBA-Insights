@@ -3,12 +3,12 @@ import React, { useState } from 'react'
 import { useGlobalState } from '../../context/GlobalState';
 import authService from '../../services/auth.service';
 import jwtDecode from 'jwt-decode';
-import Header from '../../components/Header';
+import Link from 'next/link';
 
-function Page() {
+function Login() {
     const router = useRouter();
 
-    const [ state, dispatch ] = useGlobalState();
+    const { state, dispatch } = useGlobalState();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -19,7 +19,6 @@ function Page() {
         authService
             .login(email, password)
             .then(async (resp) => {
-                console.log(resp)
                 let data = jwtDecode(resp.access)
                 await dispatch({
                     currentUserToken: resp.access,
@@ -32,7 +31,6 @@ function Page() {
 
     return (
         <div>
-            <Header />
             <div className='flex'>
                 <form
                     onSubmit={handleLogin}
@@ -42,7 +40,7 @@ function Page() {
                         <label htmlFor="email">Email:</label>
                         <input
                             className='border'
-                            type="text"
+                            type="password"
                             id="email"
                             name="email"
                             onChange={(e) => setEmail(e.target.value)}
@@ -68,10 +66,11 @@ function Page() {
                             value="Sign in"
                         />
                     </div>
+                    <Link href={`/registerPage`}>Register</Link>
                 </form>
             </div>
         </div>
     )
 }
 
-export default Page
+export default Login
