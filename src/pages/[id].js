@@ -3,6 +3,7 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import CustomNavbar from "../components/Navbar";
 
 function TeamDetail() {
     const [teamDetails, setTeamDetails] = useState(null);
@@ -44,6 +45,7 @@ function TeamDetail() {
 
     return (
         <div className="container">
+            <CustomNavbar />
             <div className="row">
                 <div className="mt-5 col text-end">
                     <button type="button" onClick={() => router.back()}>X</button>

@@ -37,6 +37,11 @@
       "static/chunks/main.js",
       "static/chunks/pages/player/[id].js"
     ],
+    "/playersDisplay": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/playersDisplay.js"
+    ],
     "/teamsDisplay": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",

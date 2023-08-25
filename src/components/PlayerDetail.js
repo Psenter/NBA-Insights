@@ -11,6 +11,7 @@ function PlayerDetail() {
 
     useEffect(() => {
         if (id) {
+            //GETS all details about a player that is clicked on
             axios.get(`http://127.0.0.1:8000/Players/${id}/?format=json`)
                 .then((response) => {
                     setPlayerDetails(response.data);
@@ -18,10 +19,11 @@ function PlayerDetail() {
                 .catch((error) => {
                     console.error("Error fetching player details:", error);
                 });
-
+            
+            //GETS all details of all teams
             axios.get(`http://127.0.0.1:8000/Teams/`)
                 .then((response) => {
-                    // Find the team associated with the player
+                    // find the team associated with the player through the player ID, stores data in playerTeam
                     const teamForPlayer = response.data.find(team => team.players.includes(parseInt(id, 10)));
                     setPlayerTeam(teamForPlayer);
                 })
@@ -31,10 +33,12 @@ function PlayerDetail() {
         }
     }, [id]);
 
+    //returns a loading message if one or the other is empty
     if (!playerDetails || !playerTeam) {
         return <div>Loading...</div>;
     }
 
+    //Displays all the information about a player
     return (
         <div className="container">
             <div className="mt-5 col text-end">
