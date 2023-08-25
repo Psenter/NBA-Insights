@@ -3,14 +3,11 @@ import {
   REFRESH_ENDPOINT,
   REGISTER_ENDPOINT,
 } from './auth.constants';
-
 import request from './api.request';
-
 class AuthService {
   constructor() {
     this.login = this.login.bind(this);
   }
-
   async login(email, password, username) {
     try {
       const response = await request({
@@ -22,7 +19,6 @@ class AuthService {
           username,
         },
       });
-
       if (response.data.access) {
         return this.setToken(response);
       }
@@ -30,11 +26,9 @@ class AuthService {
       return error.response;
     }
   }
-
   logout() {
     localStorage.removeItem('user');
   }
-
   async register({
     username,
     email,
@@ -56,22 +50,18 @@ class AuthService {
           image
         },
       });
-
       await this.login(email, password, username);
     } catch (error) {
       return error.response;
     }
   }
-
   setToken(response) {
     localStorage.setItem('user', JSON.stringify(response.data));
     return response.data;
   }
-
   async refreshToken() {
     try {
       const user = JSON.parse(localStorage.getItem('user'));
-
       if (user.refresh) {
         const response = await request({
           url: REFRESH_ENDPOINT,
@@ -80,7 +70,6 @@ class AuthService {
             refresh: user.refresh,
           },
         });
-
         return response.data;
       }
     } catch (error) {
@@ -88,5 +77,4 @@ class AuthService {
     }
   }
 }
-
 export default new AuthService();
