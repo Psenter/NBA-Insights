@@ -12,6 +12,11 @@
   ],
   "rootMainFiles": [],
   "pages": {
+    "/": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/index.js"
+    ],
     "/[id]": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
@@ -27,20 +32,15 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/player/[id]": [
+    "/login": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/player/[id].js"
+      "static/chunks/pages/login.js"
     ],
-    "/playersDisplay": [
+    "/register": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/playersDisplay.js"
-    ],
-    "/teamsDisplay": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/teamsDisplay.js"
+      "static/chunks/pages/register.js"
     ]
   },
   "ampFirstPages": []

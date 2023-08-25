@@ -5,6 +5,7 @@ import Link from "next/link";
 function PlayersDisplay() {
     const [players, setPlayers] = useState([]);
 
+    //makes a call to get all of my players from the database
     useEffect(() => {
         axios.get("http://127.0.0.1:8000/Players/?format=json")
             .then((response) => {
@@ -15,6 +16,7 @@ function PlayersDisplay() {
             });
     }, []);
 
+    //displays all players on screen for the viewer
     return (
         <div className="row">
             {players.map((item) => (
