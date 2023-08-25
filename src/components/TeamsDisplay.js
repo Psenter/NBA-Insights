@@ -60,7 +60,7 @@ function TeamMedia({ mediaId }) {
         <div>
             {assetUrl && (
                 <div>
-                    <img src={assetUrl} alt="Team Asset" />
+                    <img src={assetUrl} alt="Team Logo" />
                 </div>
             )}
         </div>

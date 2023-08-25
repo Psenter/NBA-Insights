@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 function TeamDetail() {
     const [teamDetails, setTeamDetails] = useState(null);
@@ -60,7 +61,7 @@ function TeamDetail() {
             <div>
                 {teamPlayers.map((player) => (
                     <div className="row text-center display-6 mb-4" key={player.id}>
-                        <div className="col-4">{player.first_name} {player.last_name}</div>
+                        <Link className="col-4" href={`/player/${player.id}`}>{player.first_name} {player.last_name}</Link>
                         <div className="col-4">Position: {player.position}</div>
                         <div className="col-4">Jersey Number: {player.jersey_number}</div>
                     </div>
