@@ -3,6 +3,7 @@ import AuthService from "../../services/auth.service";
 import { useRouter } from "next/navigation";
 import { useGlobalState } from "../../context/GlobalState";
 import jwtDecode from 'jwt-decode';
+import CustomNavbar from 'src/components/Navbar.js'
 
 function Register() {
   const {state, dispatch} = useGlobalState();
@@ -46,6 +47,7 @@ function Register() {
 
   return (
     <div className="w-screen h-screen">
+      <CustomNavbar />
       <div>
         <h1>Register</h1>
       <div className="flex">
