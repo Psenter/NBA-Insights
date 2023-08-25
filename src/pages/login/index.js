@@ -4,6 +4,7 @@ import { useGlobalState } from '../../context/GlobalState';
 import authService from '../../services/auth.service';
 import jwtDecode from 'jwt-decode';
 import Link from 'next/link';
+import CustomNavbar from '../../components/Navbar';
 
 function Page() {
     const router = useRouter();
@@ -35,13 +36,13 @@ function Page() {
     return (
         <div>
             <div>
-                <h1>Login</h1>
-                <div className='flex'>
+                <CustomNavbar />
+                <h1 className='text-center'>Login</h1>
+                <div className='flex text-center'>
                     <form
                         onSubmit={handleLogin}
-                        className='mx-auto my-auto border-2 bg-mtgray'
                     >
-                        <div className='flex justify-between m-2 items-center space-x-2'>
+                        <div className='flex mb-3'>
                             <label htmlFor="email">Email:</label><br></br>
                             <input
                                 className='border'
@@ -52,7 +53,7 @@ function Page() {
                                 required
                             />
                         </div>
-                        <div className='flex justify-between m-2 items-center space-x-2'>
+                        <div className='flex mb-3'>
                             <label htmlFor="pass">Password:</label><br></br>
                             <input
                                 className='border'
@@ -64,7 +65,7 @@ function Page() {
                                 onChange={(e) => setPassword(e.target.value)}
                             />
                         </div>
-                        <div className='flex'>
+                        <div className='flex mb-3'>
                             <input
                                 type="submit"
                                 value="Sign in"
