@@ -32,20 +32,15 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/playersDisplay": [
+    "/loginPage": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/playersDisplay.js"
+      "static/chunks/pages/loginPage.js"
     ],
-    "/standings": [
+    "/register": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/standings.js"
-    ],
-    "/teamsDisplay": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/teamsDisplay.js"
+      "static/chunks/pages/register.js"
     ]
   },
   "ampFirstPages": []

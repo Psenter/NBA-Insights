@@ -4,9 +4,8 @@ const initialState = {
   user: null,
 };
 // Create a context object
-export const GlobalStateContext = createContext();
-// Reducer function to handle state changes
-export default function reducer(state, action) {
+const GlobalStateContext = createContext();
+function reducer(state, action) {
   switch (action.type) {
     case 'SET_USER':
       return { ...state, user: action.payload };
@@ -16,7 +15,6 @@ export default function reducer(state, action) {
       return state;
   }
 }
-
 // Provider component to wrap the app
 export function GlobalStateProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
