@@ -44,6 +44,7 @@ function TeamDetail() {
                 </div>
                 <div className="col-12 text-center mt-5">
                     <h1>{teamDetails.team_name}</h1>
+                    <TeamMedia mediaId={teamDetails.media_id} />
                 </div>
             </div>
             <div className="row text-center mt-5 mb-5 display-6">
@@ -60,6 +61,32 @@ function TeamDetail() {
                     </div>
                 ))}
             </div>
+        </div>
+    );
+}
+
+function TeamMedia({ mediaId }) {
+    const [assetUrl, setAssetUrl] = useState("");
+
+    useEffect(() => {
+        if (mediaId) {
+            axios.get(`http://127.0.0.1:8000/Media/${mediaId}/?format=json`)
+                .then((response) => {
+                    setAssetUrl(response.data.asset_url);
+                })
+                .catch((error) => {
+                    console.error("Error fetching media:", error);
+                });
+        }
+    }, [mediaId]);
+
+    return (
+        <div>
+            {assetUrl && (
+                <div>
+                    <img src={assetUrl} alt="Team Asset" />
+                </div>
+            )}
         </div>
     );
 }
