@@ -37,10 +37,20 @@
       "static/chunks/main.js",
       "static/chunks/pages/login.js"
     ],
-    "/register": [
+    "/playersDisplay": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/register.js"
+      "static/chunks/pages/playersDisplay.js"
+    ],
+    "/standings": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/standings.js"
+    ],
+    "/teamsDisplay": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/teamsDisplay.js"
     ]
   },
   "ampFirstPages": []
