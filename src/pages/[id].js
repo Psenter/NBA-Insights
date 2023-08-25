@@ -6,9 +6,11 @@ import { useRouter } from "next/router";
 function TeamDetail() {
     const [teamDetails, setTeamDetails] = useState(null);
     const [teamPlayers, setTeamPlayers] = useState([]);
+    //router is created to access route-related info
     const router = useRouter();
     const { id } = router.query;
 
+    //sends a GET request to get a teams id from the DB
     useEffect(() => {
         if (id) {
             axios.get(`http://127.0.0.1:8000/Teams/${id}/?format=json`)
@@ -19,6 +21,8 @@ function TeamDetail() {
                     console.error("Error fetching team details:", error);
                 });
 
+            //when an ID is gotten, there is another call to get all players from the DB
+            //it then sorts out the plasyers that belong to the team that was selected
             axios.get(`http://127.0.0.1:8000/Players/?format=json`)
                 .then((response) => {
                     const filteredPlayers = response.data.filter(player =>
@@ -32,6 +36,7 @@ function TeamDetail() {
         }
     }, [id, teamDetails]);
 
+    //returns a loading message if one or the other is empty
     if (!teamDetails || !teamPlayers.length) {
         return <div>Loading...</div>;
     }
@@ -68,6 +73,9 @@ function TeamDetail() {
 function TeamMedia({ mediaId }) {
     const [assetUrl, setAssetUrl] = useState("");
 
+    //this call takes mediaId as a prop
+    //if mediaId is provided it sends a get request
+    //if successful it updates the setAssetUrl with the asset_url
     useEffect(() => {
         if (mediaId) {
             axios.get(`http://127.0.0.1:8000/Media/${mediaId}/?format=json`)
@@ -80,6 +88,7 @@ function TeamMedia({ mediaId }) {
         }
     }, [mediaId]);
 
+    //if asset_url is not empty it renders an image on the page
     return (
         <div>
             {assetUrl && (

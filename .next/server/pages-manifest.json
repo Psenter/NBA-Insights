@@ -2,9 +2,7 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/": "pages/index.js",
-  "/playersDisplay": "pages/playersDisplay.js",
+  "/teamsDisplay": "pages/teamsDisplay.js",
   "/[id]": "pages/[id].js",
-  "/player/[id]": "pages/player/[id].js",
-  "/teamsDisplay": "pages/teamsDisplay.js"
+  "/standings": "pages/standings.js"
 }

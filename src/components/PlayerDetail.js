@@ -5,8 +5,11 @@ import { useRouter } from "next/router";
 function PlayerDetail() {
     const [playerDetails, setPlayerDetails] = useState(null);
     const router = useRouter();
+    //gets the id from the router query
     const { id } = router.query;
 
+    //makes an axios call, checking for a valid id
+    //if there is a valid id then it fetches all that players data
     useEffect(() => {
         if (id) {
             axios.get(`http://127.0.0.1:8000/Players/${id}/?format=json`)
@@ -19,6 +22,8 @@ function PlayerDetail() {
         }
     }, [id]);
 
+    //checks if playerDetails is still null
+    //if it is it just displays a constant loading message
     if (!playerDetails) {
         return <div>Loading...</div>;
     }
