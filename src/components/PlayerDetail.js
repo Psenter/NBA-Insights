@@ -2,12 +2,16 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { useGlobalState } from "../context/GlobalState";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function PlayerDetail() {
     const [playerDetails, setPlayerDetails] = useState(null);
     const [playerTeam, setPlayerTeam] = useState(null);
     const router = useRouter();
     const { id } = router.query;
+    const [addingToFavoritesP, setAddingToFavoritesP] = useState(false);
+    const { state, dispatch } = useGlobalState();
 
     useEffect(() => {
         if (id) {
@@ -33,6 +37,42 @@ function PlayerDetail() {
         }
     }, [id]);
 
+    const handleAddFavoritesP = async () => {
+        if (!state.user) {
+            // If the user is not logged in, you can handle this case here
+            console.log("User is not logged in. Cannot add to favorites.");
+            return;
+        }
+
+        if (addingToFavoritesP) {
+            return; // Prevent multiple clicks during request processing
+        }
+
+        setAddingToFavoritesP(true);
+
+        const favoriteData = {
+            user_id: state.user.user_id,
+            player_id: id,
+        };
+
+        try {
+            const response = await axios.post('http://127.0.0.1:8000/FavoritePlayers/', favoriteData);
+            
+            if (response.status === 201) {
+                console.log("Team added to favorites:", response.data);
+                // You might want to update UI or do something else on success
+            } else {
+                console.error("Failed to add team to favorites:", response.data.error);
+                // Handle error scenario, update UI, show error message, etc.
+            }
+        } catch (error) {
+            console.error("Error adding team to favorites:", error.response);
+            // Handle other error scenarios, update UI, show error message, etc.
+        }
+
+        setAddingToFavoritesP(false);
+    };
+
     //returns a loading message if one or the other is empty
     if (!playerDetails || !playerTeam) {
         return <div>Loading...</div>;
@@ -43,6 +83,13 @@ function PlayerDetail() {
         <div className="container">
             <div className="mt-5 col text-end">
                 <button type="button" onClick={() => router.back()}>X</button>
+            </div>
+            <div>
+                {state.user ? (
+                    <button onClick={handleAddFavoritesP} disabled={addingToFavoritesP}>
+                        {addingToFavoritesP ? "Adding..." : "Add to favorites"}
+                    </button>
+                ) : null}
             </div>
             <div className="row text-center mt-5 mb-5 display-6">
                 <div className="col text-center">{playerDetails.first_name} {playerDetails.last_name}</div>
