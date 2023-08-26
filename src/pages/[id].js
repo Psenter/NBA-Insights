@@ -109,7 +109,6 @@ function TeamDetail() {
                     </div>
                 ))}
             </div>
-            {/* Rest of the JSX structure */}
         </div>
     );
 }
