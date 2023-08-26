@@ -4,15 +4,16 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import CustomNavbar from "../components/Navbar";
+import { useGlobalState } from "../context/GlobalState";
 
 function TeamDetail() {
     const [teamDetails, setTeamDetails] = useState(null);
     const [teamPlayers, setTeamPlayers] = useState([]);
-    //router is created to access route-related info
+    const [addingToFavorites, setAddingToFavorites] = useState(false);
     const router = useRouter();
     const { id } = router.query;
+    const { state, dispatch } = useGlobalState();
 
-    //sends a GET request to get a teams id from the DB
     useEffect(() => {
         if (id) {
             axios.get(`http://127.0.0.1:8000/Teams/${id}/?format=json`)
@@ -23,8 +24,6 @@ function TeamDetail() {
                     console.error("Error fetching team details:", error);
                 });
 
-            //when an ID is gotten, there is another call to get all players from the DB
-            //it then sorts out the plasyers that belong to the team that was selected
             axios.get(`http://127.0.0.1:8000/Players/?format=json`)
                 .then((response) => {
                     const filteredPlayers = response.data.filter(player =>
@@ -38,7 +37,41 @@ function TeamDetail() {
         }
     }, [id, teamDetails]);
 
-    //returns a loading message if one or the other is empty
+    useEffect(() => {
+        console.log("User Data:", state.user);
+    }, [state.user]);
+
+    const handleAddFavorites = async () => {
+        if (addingToFavorites) {
+            return; // Prevent multiple clicks during request processing
+        }
+    
+        setAddingToFavorites(true);
+    
+        const favoriteData = {
+            user_id: state.user.user_id,
+            team_id: id,
+        };
+    
+        try {
+            const response = await axios.post('http://127.0.0.1:8000/FavoriteTeams/', favoriteData);
+            console.log("Response:", response);
+        
+            if (response.status === 201) { // Check for status 201 (Created)
+                console.log("Team added to favorites:", response.data);
+                // You might want to update UI or do something else on success
+            } else {
+                console.error("Failed to add team to favorites:", response.data.error);
+                // Handle error scenario, update UI, show error message, etc.
+            }
+        } catch (error) {
+            console.error("Error adding team to favorites:", error.response);
+            // Handle other error scenarios, update UI, show error message, etc.
+        }               
+    
+        setAddingToFavorites(false);
+    };
+
     if (!teamDetails || !teamPlayers.length) {
         return <div>Loading...</div>;
     }
@@ -47,8 +80,15 @@ function TeamDetail() {
         <div className="container">
             <CustomNavbar />
             <div className="row">
-                <div className="mt-5 col text-end">
+                <div className="col text-end">
                     <button type="button" onClick={() => router.back()}>X</button>
+                </div>
+                <div>
+                    {state.user ? (
+                        <button onClick={handleAddFavorites} disabled={addingToFavorites}>
+                            {addingToFavorites ? "Adding..." : "Add to favorites"}
+                        </button>
+                    ) : null}
                 </div>
                 <div className="col-12 text-center mt-5">
                     <h1>{teamDetails.team_name}</h1>
@@ -69,6 +109,7 @@ function TeamDetail() {
                     </div>
                 ))}
             </div>
+            {/* Rest of the JSX structure */}
         </div>
     );
 }
@@ -76,9 +117,6 @@ function TeamDetail() {
 function TeamMedia({ mediaId }) {
     const [assetUrl, setAssetUrl] = useState("");
 
-    //this call takes mediaId as a prop
-    //if mediaId is provided it sends a get request
-    //if successful it updates the setAssetUrl with the asset_url
     useEffect(() => {
         if (mediaId) {
             axios.get(`http://127.0.0.1:8000/Media/${mediaId}/?format=json`)
@@ -91,7 +129,6 @@ function TeamMedia({ mediaId }) {
         }
     }, [mediaId]);
 
-    //if asset_url is not empty it renders an image on the page
     return (
         <div>
             {assetUrl && (
