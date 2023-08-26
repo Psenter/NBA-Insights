@@ -26,7 +26,7 @@ function CustomNavbar() {
                         <Nav.Link href="/teamsDisplay">Teams</Nav.Link>
                         <Nav.Link href="/standings">Standings</Nav.Link>
                         <Nav.Link href="/playersDisplay">Players</Nav.Link>
-                        {state.user && <Nav.Link href="/favorites">Favorites</Nav.Link>}
+                        {state.user && <Nav.Link href="/favoritesPage">Favorites</Nav.Link>}
                     </Nav>
                     <Form inline className="d-flex">
                         <FormControl type="text" placeholder="Search" className="mr-sm-2" />
