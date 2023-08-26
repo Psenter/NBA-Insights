@@ -2,8 +2,8 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/playersDisplay": "pages/playersDisplay.js",
-  "/player/[id]": "pages/player/[id].js",
+  "/": "pages/index.js",
+  "/[id]": "pages/[id].js",
   "/favoritesPage": "pages/favoritesPage.js",
-  "/[id]": "pages/[id].js"
+  "/player/[id]": "pages/player/[id].js"
 }
