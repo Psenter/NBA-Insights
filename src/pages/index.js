@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect } from "react";
 import jwtDecode from "jwt-decode";
 import { useGlobalState } from "../context/GlobalState";
+import GameComponent from "../components/GameComponent";
 
 export default function Page() {
   const {state, dispatch} = useGlobalState();
@@ -29,6 +30,7 @@ export default function Page() {
       <div>
         <Header/>
         <CustomNavbar/>
+        <GameComponent/>
       </div>
   );
 }
