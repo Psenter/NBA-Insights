@@ -145,15 +145,15 @@ function PlayerDetail() {
       <div className="row text-center mt-5 mb-5 display-6">
         <div className="col-4">BPG: {playerDetails.bpg}</div>
         <div className="col-4">
-          Field goal percentage: {playerDetails.field_goal_percent}
+          Field goal percentage: {playerDetails.field_goal_percent}%
         </div>
         <div className="col-4">
-          Three pointer percentage: {playerDetails.three_pointer_percent}
+          Three pointer percentage: {playerDetails.three_pointer_percent}%
         </div>
       </div>
       <div className="row text-center mt-5 mb-5 display-6">
         <div className="col-4">
-          Free throw percentage: {playerDetails.free_throw_percent}
+          Free throw percentage: {playerDetails.free_throw_percent}%
         </div>
         <div className="col-4">Turnovers: {playerDetails.turnovers}</div>
         <div className="col-4">Minutes: {playerDetails.minutes_played}</div>

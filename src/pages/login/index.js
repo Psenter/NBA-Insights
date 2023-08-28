@@ -5,6 +5,7 @@ import authService from "../../services/auth.service";
 import jwtDecode from "jwt-decode";
 import Link from "next/link";
 import CustomNavbar from "../../components/Navbar";
+import Header from "../../components/Header";
 
 function Page() {
   const router = useRouter();
@@ -32,8 +33,8 @@ function Page() {
   };
 
   return (
-    <div>
       <div>
+        <Header/>
         <CustomNavbar />
         <h1 className="text-center">Login</h1>
         <div className="flex text-center">
@@ -70,7 +71,6 @@ function Page() {
           <Link className="link-gone btn border border-dark" href="/register">Register Here</Link>
         </div>
       </div>
-    </div>
   );
 }
 export default Page;

@@ -5,6 +5,8 @@ import { useGlobalState } from "../../context/GlobalState";
 import jwtDecode from "jwt-decode";
 import CustomNavbar from "src/components/Navbar.js";
 import Link from "next/link";
+import Header from "../../components/Header";
+import Head from "next/head";
 
 function Register() {
   const { state, dispatch } = useGlobalState();
@@ -51,7 +53,8 @@ function Register() {
   }
 
   return (
-    <div className="w-screen h-screen">
+    <div>
+      <Header/>
       <CustomNavbar />
       <div className="text-center">
         <h1 className="mb-3">Register</h1>

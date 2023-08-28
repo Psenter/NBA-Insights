@@ -96,7 +96,8 @@ function FavoritesComponent() {
       <ul>
         {teamFavorites.map((team) => (
           <div className="row ms-5 me-5 mb-4">
-            <li className="display-6 col-10" key={team.id}>
+            <div className="col-2"></div>
+            <li className="display-6 col-6" key={team.id}>
               <Link className="link-gone" href={`/[id]`} as={`/${team.id}`}>
                 {teamNameMap[team.team_id]}
               </Link>
@@ -107,6 +108,7 @@ function FavoritesComponent() {
             >
               Delete
             </button>
+            <div className="col-2"></div>
           </div>
         ))}
       </ul>
@@ -115,7 +117,8 @@ function FavoritesComponent() {
       <ul>
         {playerFavorites.map((player) => (
           <div className="row me-5 ms-5 mb-4">
-            <li className="display-6 col-10" key={player.id}>
+            <div className="col-2"></div>
+            <li className="display-6 col-6" key={player.id}>
               <Link className="link-gone" href={`/player/${player.player_id}`}>
                 {playerNameMap[player.player_id]}
               </Link>
@@ -126,6 +129,7 @@ function FavoritesComponent() {
             >
               Delete
             </button>
+            <div className="col-2"></div>
           </div>
         ))}
       </ul>

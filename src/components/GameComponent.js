@@ -53,7 +53,7 @@ function GameForm() {
   };
 
   return (
-    <div className="text-center">
+    <div className="container-fluid text-center">
       {isStaffUser === 5 && (
         <div>
           <h1>Create a New Game</h1>
@@ -167,7 +167,7 @@ function GameList() {
   };
 
   return (
-    <div className="text-center ms-5 me-5 mb-5">
+    <div className="text-center mb-5">
       <h2>Games List</h2>
       {games.map((game) => {
         const teamA = getTeamDataById(game.team_id_a);
@@ -177,10 +177,10 @@ function GameList() {
 
         return (
           <div
-            className="row justify-content-center ms-5 me-5 display-6"
+            className="row justify-content-center display-6"
             key={game.id}
           >
-            <div className="col-3 mt-5 ms-5">
+            <div className="col-4 mt-5">
               {mediaUrlA && (
                 <>
                   <div>
@@ -191,7 +191,7 @@ function GameList() {
               )}
             </div>
             <div className="col-1 my-auto">vs.</div>
-            <div className="col-3 me-5 mt-5">
+            <div className="col-4 mt-5">
               {mediaUrlB && (
                 <>
                   <div>
