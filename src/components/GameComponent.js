@@ -53,7 +53,7 @@ function GameForm() {
   };
 
   return (
-    <div>
+    <div className="text-center">
       {isStaffUser === 5 && (
         <div>
           <h1>Create a New Game</h1>
@@ -88,7 +88,11 @@ function GameForm() {
                 ))}
               </select>
             </div>
-            <button onClick={() => router.reload()} type="submit">
+            <button
+              className="btn btn-danger"
+              onClick={() => router.reload()}
+              type="submit"
+            >
               Create Game
             </button>
           </form>
@@ -106,7 +110,7 @@ function GameList() {
   const [media, setMedia] = useState([]);
   const { state, dispatch } = useGlobalState();
   const isStaffUser = state.user ? state.user.user_id : null;
-  
+
   useEffect(() => {
     axios
       .get("http://127.0.0.1:8000/Games/?format=json")
@@ -138,8 +142,10 @@ function GameList() {
 
   const deleteGame = async (gameId) => {
     try {
-      const response = await axios.delete(`http://127.0.0.1:8000/Games/${gameId}/`);
-  
+      const response = await axios.delete(
+        `http://127.0.0.1:8000/Games/${gameId}/`
+      );
+
       if (response.status === 204) {
         setGames(games.filter((game) => game.id !== gameId));
       } else {
@@ -148,7 +154,7 @@ function GameList() {
     } catch (error) {
       console.error("Error deleting game:", error);
     }
-  };  
+  };
 
   const getTeamDataById = (teamId) => {
     const team = gameTeams.find((team) => team.id === teamId);
@@ -161,7 +167,7 @@ function GameList() {
   };
 
   return (
-    <div className="text-center">
+    <div className="text-center ms-5 me-5 mb-5">
       <h2>Games List</h2>
       {games.map((game) => {
         const teamA = getTeamDataById(game.team_id_a);
@@ -170,8 +176,11 @@ function GameList() {
         const mediaUrlB = teamB ? getMediaUrlById(teamB.media_id) : null;
 
         return (
-          <div className="row justify-content-center" key={game.id}>
-            <div className="col-3">
+          <div
+            className="row justify-content-center ms-5 me-5 display-6"
+            key={game.id}
+          >
+            <div className="col-3 mt-5 ms-5">
               {mediaUrlA && (
                 <>
                   <div>
@@ -181,8 +190,8 @@ function GameList() {
                 </>
               )}
             </div>
-            <div className="col-3 my-auto">vs.</div>
-            <div className="col-3">
+            <div className="col-1 my-auto">vs.</div>
+            <div className="col-3 me-5 mt-5">
               {mediaUrlB && (
                 <>
                   <div>
@@ -193,8 +202,11 @@ function GameList() {
               )}
             </div>
             {isStaffUser === 5 && (
-              <div className="col">
-                <button onClick={() => deleteGame(game.id)} className="btn btn-danger">
+              <div>
+                <button
+                  onClick={() => deleteGame(game.id)}
+                  className="btn btn-danger"
+                >
                   Delete
                 </button>
               </div>
