@@ -1,24 +1,25 @@
 import Link from "next/link";
 import CustomNavbar from "../components/Navbar";
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import Standings from "../components/Standings";
 import { useEffect } from "react";
 import jwtDecode from "jwt-decode";
 import { useGlobalState } from "../context/GlobalState";
+import Header from "../components/Header";
 
 export default function Page() {
-  const {state, dispatch} = useGlobalState();
+  const { state, dispatch } = useGlobalState();
   useEffect(() => {
     // Function to retrieve user data from local storage
     const getUserFromLocalStorage = () => {
-      const userData = localStorage.getItem('user');
+      const userData = localStorage.getItem("user");
       if (userData) {
         const user = jwtDecode(userData);
-        console.log('User data:', user);
+        console.log("User data:", user);
         dispatch({
-            type: 'SET_USER',
-            payload: user
+          type: "SET_USER",
+          payload: user,
         });
       }
     };
@@ -27,8 +28,9 @@ export default function Page() {
 
   return (
     <div>
-      <CustomNavbar/>
-      <Standings/>
+      <Header />
+      <CustomNavbar />
+      <Standings />
     </div>
   );
 }

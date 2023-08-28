@@ -6,8 +6,12 @@ import Image from "next/image";
 
 function Header() {
   return (
-    <div className="text-center">
-      <img className="img-fluid" src="/fourlogo.PNG" alt="Logo for the site"></img>
+    <div className="text-center header-bg">
+      <img
+        className="img-fluid"
+        src="/onelogo.PNG"
+        alt="Logo for the site"
+      ></img>
     </div>
   );
 }

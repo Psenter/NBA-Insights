@@ -64,7 +64,7 @@ function Register() {
               <label htmlFor="firstName">First Name:</label>
               <br></br>
               <input
-                className="border"
+                className="border border-dark"
                 type="text"
                 id="firstName"
                 required
@@ -75,7 +75,7 @@ function Register() {
               <label htmlFor="lastName">Last Name:</label>
               <br></br>
               <input
-                className="border"
+                className="border border-dark"
                 type="text"
                 id="lastName"
                 required
@@ -86,7 +86,7 @@ function Register() {
               <label htmlFor="email">Email:</label>
               <br></br>
               <input
-                className="border"
+                className="border border-dark"
                 type="text"
                 id="email"
                 required
@@ -102,7 +102,7 @@ function Register() {
               <label htmlFor="password">Password:</label>
               <br></br>
               <input
-                className="border"
+                className="border border-dark"
                 type="password"
                 id="password"
                 required
@@ -113,7 +113,7 @@ function Register() {
               <label htmlFor="passwordConf">Confirm Password:</label>
               <br></br>
               <input
-                className="border"
+                className="border border-dark"
                 type="password"
                 id="passwordConf"
                 required
@@ -122,6 +122,7 @@ function Register() {
             </div>
             <div className="flex mb-3">
               <input
+                className="btn border border-dark"
                 type="submit"
                 value="Register!"
                 disabled={
@@ -137,7 +138,9 @@ function Register() {
               />
             </div>
           </form>
-          <Link href="/login">Login</Link>
+          <Link className="link-gone btn border border-dark" href="/login">
+            Login
+          </Link>
         </div>
       </div>
     </div>

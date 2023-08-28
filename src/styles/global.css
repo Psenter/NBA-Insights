@@ -1,0 +1,20 @@
+.bg-color {
+  background-color: #414141;
+}
+
+.dark-bg-color {
+  background-color: #242424;
+}
+
+.header-bg {
+  background-color: #be3144;
+}
+
+.img-bigger {
+  width: 250px;
+  height: auto;
+}
+
+.link-gone {
+  color: black;
+}

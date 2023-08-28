@@ -14,7 +14,7 @@ function Standings() {
       .then((response) => {
         const teamsData = response.data;
         setTeams(teamsData);
-        
+
         //checks if the team is located in the east or west based on the ID it has
         const eastConferenceTeams = teamsData.filter(
           (team) => team.conference_id === 1
@@ -40,28 +40,37 @@ function Standings() {
   return (
     <div className="row text-center mt-4">
       <div className="col">
-        <h2>Eastern Conference</h2>
+        <h2 className="display-4 mb-5 border-bottom border-dark">
+          Eastern Conference
+        </h2>
         {easternConference.map((item) => (
-          <h3 key={item.id}>
-            {/* the key adds an identifier to each element as they are mapped out */}
-            {/* the href makes the URL equal to the [id].js file */}
-            {/* the 'as' attribute sets the actual link that will be displayed in the browser */}
-            <Link key={item.id} href={`/[id]`} as={`/${item.id}`}>
-              <div className="mb-3">{item.team_name}</div>
-            </Link>
-            {item.wins} - {item.losses}
-          </h3>
+          <div className="row border-end border-dark" key={item.id}>
+            <div className="col display-6">
+              <Link className="link-gone" href={`/[id]`} as={`/${item.id}`}>
+                <div className="mb-5">{item.team_name}</div>
+              </Link>
+            </div>
+            <div className="col-4 display-6">
+              {item.wins} - {item.losses}
+            </div>
+          </div>
         ))}
       </div>
       <div className="col">
-        <h2>Western Conference</h2>
+        <h2 className="display-4 mb-5 border-bottom border-dark">
+          Western Conference
+        </h2>
         {westernConference.map((item) => (
-          <h3 key={item.id}>
-            <Link key={item.id} href={`/[id]`} as={`/${item.id}`}>
-              <div className="mb-3">{item.team_name}</div>
-            </Link>
-            {item.wins} - {item.losses}
-          </h3>
+          <div className="row" key={item.id}>
+            <div className="col">
+              <Link className="link-gone" href={`/[id]`} as={`/${item.id}`}>
+                <div className="mb-5 display-6">{item.team_name}</div>
+              </Link>
+            </div>
+            <div className="col-4 display-6">
+              {item.wins} - {item.losses}
+            </div>
+          </div>
         ))}
       </div>
     </div>
